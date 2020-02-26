@@ -62,7 +62,16 @@ class App extends Component {
             path='/'
             exact
             render={() => (
-              <Home allItems={this.state.allItems} item={this.state.selectedItem}/> )} />   
+              <Home allItems={this.state.allItems} item={this.state.selectedItem} onShowDetails={this.showDetails} />  )} />   
+          <Route 
+          path='/item-details/:id'
+          render={props => (
+            <ItemDetails 
+              {...props}
+              item={this.state.selectedItem}
+              allItems={this.state.allItems} 
+              onShowDetails={this.showDetails} 
+              /> ) } />
           <Route 
             path="/cart"
             render={props => < CartContainer {...props} /> } />

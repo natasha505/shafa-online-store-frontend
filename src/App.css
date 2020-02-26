@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+.item-details {
+  border: 1px solid white;
+  width: 60%;
+  margin: auto;
+  padding: 10px;
+  -webkit-box-shadow: 10px 10px 5px rgb(197, 197, 197);
+
+}
+
+.item-img {
+  height: 200px
+}
