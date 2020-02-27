@@ -18,7 +18,7 @@ class ItemDetails extends Component {
       })
     }).then(res => res.json()).then(data => {
       console.log("POST TO CART", data)
-      // this.props.setUserState(data)
+      this.props.setUserCart(data)
     })
   }
 

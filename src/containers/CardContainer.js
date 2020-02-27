@@ -22,7 +22,7 @@ class CardContainer extends Component {
 // basic padded='very' raised >
   render() {
     return( 
-      <div>
+      <div className="card-container">
         <Grid>
           <Grid.Row columns={4}>
             {/* <Grid.Column> */}

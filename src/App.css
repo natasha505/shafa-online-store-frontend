@@ -37,13 +37,19 @@
   }
 }
 
+.card-container {
+  border: 1px solid white;
+  width: 80%;
+  margin: auto;
+  padding: 10px;
+}
+
 .item-details {
   border: 1px solid white;
   width: 60%;
   margin: auto;
   padding: 10px;
   -webkit-box-shadow: 10px 10px 5px rgb(197, 197, 197);
-
 }
 
 .item-img {
@@ -64,7 +70,6 @@
   border: 5px solid red;
   width: 65%;
   margin: 5rem 5rem 5rem 5rem;
-
 }
 
 .my-account-container-right {
@@ -73,6 +78,11 @@
   width: 20%;
   padding: 30px;
   margin: 5rem 5rem 5rem 5rem;
+}
 
-
+.cart-container {
+  border: 1px solid black;
+  width: 90%;
+  margin: auto;
+  padding: 10px;
 }

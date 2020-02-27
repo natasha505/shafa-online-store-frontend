@@ -25,7 +25,14 @@ class App extends Component {
     admin: false,
     allItems: [],
     selectedItem: false,
-    cart: []
+    cart: [],
+    user: {id: null, name: ''}
+  }
+
+  setUserCart = (cartObj) => {
+    this.setState(prevState => ({
+      cart: [...prevState.cart, cartObj]
+    }))
   }
 
   setUserState = (data)  => {
@@ -35,8 +42,8 @@ class App extends Component {
       img: data.img,
       loggedIn: true,
       admin: data.admin,
-      id: data.id
-    })
+      id: data.id,
+    },() => this.fetchUserCart())
   }
 
   logOut = () => {
@@ -48,11 +55,23 @@ class App extends Component {
       admin: "",
       id: "data.id"
     })
+    localStorage.clear()
   }
 
   componentDidMount() {
+    console.log(localStorage.getItem("user"))
+    if (localStorage.getItem("user")){ 
+      let user = (JSON.parse(localStorage.getItem("user")))
+      this.setState({
+        loggedIn: true,
+        name: user.name,
+        email: user.email,
+        img: user.img,
+        id: user.id
+      },() => this.fetchUserCart())
+    }
     this.fetchItems();
-    this.fetchCarts();
+    // this.fetchUserCart();
   }
 
   fetchItems = () => {
@@ -62,8 +81,8 @@ class App extends Component {
       )
     };
 
-  fetchCarts = () => {
-    fetch("http://localhost:3000/carts")
+  fetchUserCart = () => {
+    fetch(`http://localhost:3000/usercarts/${this.state.id}`)
     .then(res => res.json())
     .then(data => this.setState({ cart: data }))
     // .then(data => console.log(data))
@@ -87,10 +106,10 @@ class App extends Component {
               render={() => ( <Home allItems={this.state.allItems} selectedItem={this.state.selectedItem} onShowDetails={this.showDetails} />  )} />   
             <Route 
               path='/item-details/:id'
-              render={props => ( <ItemDetails  {...props} userId={this.state.id} item={this.state.selectedItem} allItems={this.state.allItems}  onShowDetails={this.showDetails}  /> ) } />
+              render={props => ( <ItemDetails  {...props} setUserCart={this.setUserCart} userId={this.state.id} item={this.state.selectedItem} allItems={this.state.allItems}  onShowDetails={this.showDetails}  /> ) } />
             <Route 
               path="/cart"  
-              render={props => ( < CartContainer cart={this.state.cart} email={this.state.email} {...props} />) } />
+              render={props => ( < CartContainer cart={this.state.cart} userId={this.state.id} {...props} />) } />
             {/* <Route 
               path="/checkout" render={props => < CartContainer {...props} /> } /> */}
             <Route 
@@ -127,8 +146,8 @@ class App extends Component {
 
   render() {
     console.log("cart: ", this.state.cart)
-    console.log("loggedIn: ", this.state.loggedIn)
-    console.log("selectedItemState : ", this.state.selectedItem)
+    // console.log("loggedIn: ", this.state.loggedIn)
+    // console.log("selectedItemState : ", this.state.selectedItem)
     return (
       <div>
         {this.routeCountroller()}

@@ -12,7 +12,7 @@ class Login extends Component {
   render() {
 
     const responseFacebook = (response) => {
-      console.log("FACEBOOK")
+      console.log("FACEBOOK", response.picture.data.url)
       console.log(response);
       fetch("http://localhost:3000/users/", {
         method: "POST",
@@ -26,9 +26,12 @@ class Login extends Component {
         })
       }).then(res => res.json()).then(data => {
         console.log("FACEBOOK USER", data)
+        localStorage.setItem("user", JSON.stringify(data))
         this.props.setUserState(data)
       })
     }
+
+    
 
     const responseGoogle = (response) => {
       console.log(response);
@@ -42,8 +45,18 @@ class Login extends Component {
           location: "",
           img: response.profileObj.imageUrl
         })
-      }).then(res => res.json()).then(data => {
+      }).then(res => res.json())
+      .then(data => {
         console.log("GOOGLE USER", data)
+        localStorage.setItem("user", JSON.stringify(data))
+        // .then(() => {
+        //   localStorage.setItem("user", data)
+        //   // if(JSON.parse(localStorage.getItem('user')).id){
+        //   //   this.setState({user: JSON.parse(localStorage.getItem("user"))})
+        //   // }
+        // })
+        // localStorage.clear();
+        // localStorage.setItem("user_id", data['id']);
         this.props.setUserState(data)
       })
     }
