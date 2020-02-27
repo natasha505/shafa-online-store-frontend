@@ -7,7 +7,7 @@ class ItemCard extends Component {
 
  handleItemClick = () => {
    console.log("handleClick", this.props.item)
-  console.log(this.props.history)
+  // console.log(this.props.history)
    this.props.onShowDetails(this.props.item)
    this.props.history.push(`/item-details/${this.props.item.id}`)
 

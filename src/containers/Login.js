@@ -12,6 +12,7 @@ class Login extends Component {
   render() {
 
     const responseFacebook = (response) => {
+      console.log("FACEBOOK")
       console.log(response);
       fetch("http://localhost:3000/users/", {
         method: "POST",
@@ -23,7 +24,10 @@ class Login extends Component {
           location: "",
           img: response.picture.data.url
         })
-      }).then(res => res.json()).then(data => this.props.setUserState(data))
+      }).then(res => res.json()).then(data => {
+        console.log("FACEBOOK USER", data)
+        this.props.setUserState(data)
+      })
     }
 
     const responseGoogle = (response) => {
@@ -38,10 +42,11 @@ class Login extends Component {
           location: "",
           img: response.profileObj.imageUrl
         })
-      }).then(res => res.json()).then(data => this.props.setUserState(data))
-      
+      }).then(res => res.json()).then(data => {
+        console.log("GOOGLE USER", data)
+        this.props.setUserState(data)
+      })
     }
-
 
     return (
 
@@ -68,7 +73,6 @@ class Login extends Component {
         </div>
           <LoginForm />
         </div>
-
 
       </div>
     )

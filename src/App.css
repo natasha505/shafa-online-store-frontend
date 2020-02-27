@@ -49,3 +49,30 @@
 .item-img {
   height: 200px
 }
+
+.my-account-container{
+  display: flex;
+  /* border: 10px solid green; */
+  width: 90%;
+  margin: auto;
+  -webkit-box-shadow: 10px 10px 5px rgb(197, 197, 197);
+}
+
+
+.my-account-container-left {
+  float: left;
+  border: 5px solid red;
+  width: 65%;
+  margin: 5rem 5rem 5rem 5rem;
+
+}
+
+.my-account-container-right {
+  /* border: 5px solid blue; */
+  float: right;
+  width: 20%;
+  padding: 30px;
+  margin: 5rem 5rem 5rem 5rem;
+
+
+}

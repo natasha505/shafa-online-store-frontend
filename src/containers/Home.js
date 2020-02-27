@@ -8,7 +8,7 @@ class Home extends Component {
     return(
       <div style={{textAlign: "center" }}>
         <h1 >HOME PAGE</h1>
-        <CardContainer allItems={this.props.allItems}  onShowDetails={this.props.onShowDetails} /> 
+        <CardContainer allItems={this.props.allItems} selectedItem={this.props.selectedItem} onShowDetails={this.props.onShowDetails} /> 
       </div>
     )
   }

@@ -6,8 +6,25 @@ import { withRouter } from 'react-router-dom'
 
 class ItemDetails extends Component {
 
+  handleAddToCart = item => {
+    console.log("handleAddToCart ", this.props.userId)
+    console.log("handleAddToCart ", item)
+    fetch("http://localhost:3000/carts", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        user_id: this.props.userId,
+        item_id: item.id
+      })
+    }).then(res => res.json()).then(data => {
+      console.log("POST TO CART", data)
+      // this.props.setUserState(data)
+    })
+  }
+
   render() {
-    console.log(this.props.item)
+    console.log("ItemDetails", this.props.item)
+    console.log("ItemDetails userId: ", this.props.userId)
     return(
       <div className="details-container">
         <h1>ITEM DETAILS</h1>
@@ -28,7 +45,7 @@ class ItemDetails extends Component {
                 <Label> {this.props.item.condition} </Label>
               </Item.Extra>
               <Item.Description>{this.props.item.details}</Item.Description><br></br>
-              <Button  size='medium' floated='right' attached='bottom' animated='fade' >
+              <Button  size='medium' floated='right' attached='bottom' animated='fade' onClick={() => this.handleAddToCart(this.props.item)}>
                 <Button.Content hidden>Add To Cart</Button.Content>
                 <Button.Content visible>
                   <Icon name='shop' />
@@ -37,12 +54,10 @@ class ItemDetails extends Component {
             </Item.Content>
             </Item>
           </Item.Group>
-
         </div>
       </div>
     );
-
-  }
+  };
 
 }
 export default withRouter (ItemDetails) ;
