@@ -64,7 +64,6 @@
   -webkit-box-shadow: 10px 10px 5px rgb(197, 197, 197);
 }
 
-
 .my-account-container-left {
   float: left;
   border: 5px solid red;
@@ -82,7 +81,12 @@
 
 .cart-container {
   border: 1px solid black;
-  width: 90%;
+  width: 30%;
   margin: auto;
-  padding: 10px;
+  margin-top: 5%;
+  padding: 4% 4%;
+}
+
+.cart-total {
+  border: 5px solid red;
 }

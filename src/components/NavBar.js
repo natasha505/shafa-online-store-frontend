@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import logo from '../images/logo.png';
 
-import { Button, Image, Icon, Input, Menu, Sticky } from 'semantic-ui-react';
+import { Image, Icon, Input, Menu, Sticky } from 'semantic-ui-react';
 import { Link } from  'react-router-dom';
 
 // yellow: eca400   dark:  4c243b     darker:  230c0f
@@ -33,7 +33,7 @@ class NavBar extends Component{
       <div>
         <Menu pointing attached='top' inverted tabular margin-bottom="10em" style={{ backgroundColor: '#4C243B'}}>
           <Menu.Item> 
-            <Link to="/" exact> 
+            <Link to="/" >  
               <Image src={logo} size='small' wrapped width="140px" centered/> 
             </Link>
           </Menu.Item>
@@ -66,20 +66,3 @@ class NavBar extends Component{
   }
 }
 export default NavBar;
-
-{/* <button class="ui fade animated button">
-if (this.state.loggedIn) {
-  <div class="hidden content">Log In</div>
-} else {
-  <div class="hidden content">My Account</div>
-}
-<div class="visible content"><i aria-hidden="true" class="user icon"></i></div>
-</button> */}
-
-
-{/* <Button animated='fade'>
-  <Button.Content hidden>Log In</Button.Content>
-  <Button.Content visible>
-    <Icon name='user' />
-  </Button.Content>
-</Button> */}

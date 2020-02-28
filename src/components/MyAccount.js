@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import CartContainer from '../containers/CartContainer';
-import MiniCartItem from './MiniCartItem';
 
-// import { Card, Image } from 'semantic-ui-css';
 import { Card, Image, Button, Item } from 'semantic-ui-react';
 
 class MyAccount extends Component {

@@ -31,15 +31,3 @@ class ItemCard extends Component {
   }
 }
 export default withRouter ( ItemCard );
-
-{/* <Redirect to='/item-details/:id' /> */}
-
-
-     {/* { console.log("ItemCard: ", this.props.item)} */}
-        {/* <div className="item-card"  style={{ paddingRight:"10px", paddingTop:"10px" }} onClick={this.handleItemClick} >
-        <img style={{width: "200px"}} src={this.props.item.img} />
-        <h3>{this.props.item.name}</h3>
-        <p>Size: {this.props.item.size}</p>
-        </div> */}
-
-{/* this.showItemDetails() */}

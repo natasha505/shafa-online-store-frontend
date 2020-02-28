@@ -23,7 +23,7 @@ class App extends Component {
     img: "",
     loggedIn: false,
     admin: false,
-    allItems: [],
+    availItems: [],
     selectedItem: false,
     cart: [],
     user: {id: null, name: ''}
@@ -33,6 +33,12 @@ class App extends Component {
     this.setState(prevState => ({
       cart: [...prevState.cart, cartObj]
     }))
+  }
+
+  clearUserCart = () => {
+    this.setState({
+      cart: []
+    })
   }
 
   setUserState = (data)  => {
@@ -59,7 +65,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(localStorage.getItem("user"))
+    // console.log(localStorage.getItem("user"))
     if (localStorage.getItem("user")){ 
       let user = (JSON.parse(localStorage.getItem("user")))
       this.setState({
@@ -75,9 +81,10 @@ class App extends Component {
   }
 
   fetchItems = () => {
-    fetch("http://localhost:3000/items")
+    // fetch("http://localhost:3000/items")
+    fetch("http://localhost:3000/availableitems")
       .then(res => res.json())
-      .then(data => this.setState({ allItems: data})
+      .then(data => this.setState({ availItems: data})
       )
     };
 
@@ -103,13 +110,13 @@ class App extends Component {
             <Route
               path='/' 
               exact
-              render={() => ( <Home allItems={this.state.allItems} selectedItem={this.state.selectedItem} onShowDetails={this.showDetails} />  )} />   
+              render={() => ( <Home availItems={this.state.availItems} selectedItem={this.state.selectedItem} onShowDetails={this.showDetails} />  )} />   
             <Route 
               path='/item-details/:id'
-              render={props => ( <ItemDetails  {...props} setUserCart={this.setUserCart} userId={this.state.id} item={this.state.selectedItem} allItems={this.state.allItems}  onShowDetails={this.showDetails}  /> ) } />
+              render={props => ( <ItemDetails  {...props} setUserCart={this.setUserCart} cart={this.state.cart} userId={this.state.id} item={this.state.selectedItem} availItems={this.state.availItems}  onShowDetails={this.showDetails}  /> ) } />
             <Route 
               path="/cart"  
-              render={props => ( < CartContainer cart={this.state.cart} userId={this.state.id} {...props} />) } />
+              render={props => ( < CartContainer {...props} cart={this.state.cart} userId={this.state.id} setUserCart={this.setUserCart} clearUserCart={this.clearUserCart} />  )} />
             {/* <Route 
               path="/checkout" render={props => < CartContainer {...props} /> } /> */}
             <Route 
@@ -119,7 +126,7 @@ class App extends Component {
                 return (< MyAccount {...props} logOut={this.logOut} cart={this.state.cart} 
                 userName={this.state.name} email={this.state.email} userImg={this.state.img} /> )
                } } />
-            <Redirect to='/' />
+            {/* <Redirect to='/' /> */}
           </Router>
           ) 
       } else {
@@ -127,25 +134,22 @@ class App extends Component {
             <Router>
              
               <NavBar loggedIn={this.state.loggedIn}/>
-              {/* </Route><Route  path="/my-account" exact render={props => < MyAccount {...props} /> } /> */}
               <Route
                 path='/'  
                 exact
-                render={() => ( <Home allItems={this.state.allItems}  onShowDetails={this.showDetails} /> )} />   
+                render={() => ( <Home availItems={this.state.availItems}  onShowDetails={this.showDetails} /> )} />   
               <Route
                 path='/login' render={props => < Login {...props} setUserState={this.setUserState} /> } />
               <Route 
                 path='/item-details/:id'
-                render={props => ( <ItemDetails   {...props}  item={this.state.selectedItem}  allItems={this.state.allItems}  onShowDetails={this.showDetails} addToCart={this.handleAddToCart} /> ) } />
-              {/* <Redirect to='/' /> */}
-
+                render={props => ( <ItemDetails   {...props}  item={this.state.selectedItem}  availItems={this.state.availItems}  onShowDetails={this.showDetails} addToCart={this.handleAddToCart} /> ) } />
             </Router>
           )
         }
     }
 
   render() {
-    console.log("cart: ", this.state.cart)
+    // console.log("cart: ", this.state.cart)
     // console.log("loggedIn: ", this.state.loggedIn)
     // console.log("selectedItemState : ", this.state.selectedItem)
     return (

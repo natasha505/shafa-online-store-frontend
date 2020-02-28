@@ -10,11 +10,11 @@ class CardContainer extends Component {
 //map over cards & display them
   renderCards = () => {
     // console.log("CardContainer: ", this.props.allItems)
-    return this.props.allItems.map(item => {
+    return this.props.availItems.map((item, id) => {
       // {console.log("CardContainer Item: ", item)}
       return (
           <Grid.Column>
-            <ItemCard item={item} selectedItem={this.props.selectedItem} handleAddToCart={this.handleAddToCart} onShowDetails={this.props.onShowDetails} />
+            <ItemCard item={item} key={id} selectedItem={this.props.selectedItem} handleAddToCart={this.handleAddToCart} onShowDetails={this.props.onShowDetails} />
           </Grid.Column>
       )
     })
