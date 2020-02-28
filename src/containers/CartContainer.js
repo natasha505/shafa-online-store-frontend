@@ -40,7 +40,6 @@ class CartContainer extends Component {
             this.handleCheckout(kart.id)
             // this.patchItemStatus(kart.item_id)
         })
-            
     }
 
     handleCheckout = (cartId) => {
@@ -59,7 +58,9 @@ class CartContainer extends Component {
             })
         }).then(res => res.json()).then(data => {
             console.log(data)
+            this.props.fetchAvailItems()
             this.props.clearUserCart()
+
         })
     }
 

@@ -41,6 +41,8 @@ class App extends Component {
     })
   }
 
+
+
   setUserState = (data)  => {
     this.setState({
       name: data.name,
@@ -76,11 +78,11 @@ class App extends Component {
         id: user.id
       },() => this.fetchUserCart())
     }
-    this.fetchItems();
+    this.fetchAvailItems();
     // this.fetchUserCart();
   }
 
-  fetchItems = () => {
+  fetchAvailItems = () => {
     // fetch("http://localhost:3000/items")
     fetch("http://localhost:3000/availableitems")
       .then(res => res.json())
@@ -116,7 +118,7 @@ class App extends Component {
               render={props => ( <ItemDetails  {...props} setUserCart={this.setUserCart} cart={this.state.cart} userId={this.state.id} item={this.state.selectedItem} availItems={this.state.availItems}  onShowDetails={this.showDetails}  /> ) } />
             <Route 
               path="/cart"  
-              render={props => ( < CartContainer {...props} cart={this.state.cart} userId={this.state.id} setUserCart={this.setUserCart} clearUserCart={this.clearUserCart} />  )} />
+              render={props => ( < CartContainer {...props} cart={this.state.cart} userId={this.state.id} setUserCart={this.setUserCart} clearUserCart={this.clearUserCart} fetchAvailItems={this.fetchAvailItems} />  )} />
             {/* <Route 
               path="/checkout" render={props => < CartContainer {...props} /> } /> */}
             <Route 
