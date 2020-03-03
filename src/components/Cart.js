@@ -4,7 +4,6 @@ class Cart extends Component{
 
   showCart = () => {
     fetch("http://localhost:3000/carts", {
-
     })
   }
 

@@ -4,10 +4,9 @@ import './Login.css';
 
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
-import LoginForm from '../components/LoginForm';
+// import LoginForm from '../components/LoginForm';
 
 class Login extends Component {
-
 
   render() {
 
@@ -31,8 +30,6 @@ class Login extends Component {
       })
     }
 
-    
-
     const responseGoogle = (response) => {
       console.log(response);
       fetch("http://localhost:3000/users/", {
@@ -49,14 +46,6 @@ class Login extends Component {
       .then(data => {
         console.log("GOOGLE USER", data)
         localStorage.setItem("user", JSON.stringify(data))
-        // .then(() => {
-        //   localStorage.setItem("user", data)
-        //   // if(JSON.parse(localStorage.getItem('user')).id){
-        //   //   this.setState({user: JSON.parse(localStorage.getItem("user"))})
-        //   // }
-        // })
-        // localStorage.clear();
-        // localStorage.setItem("user_id", data['id']);
         this.props.setUserState(data)
       })
     }
@@ -84,7 +73,7 @@ class Login extends Component {
             onFailure={responseGoogle}
           />
         </div>
-          <LoginForm />
+          {/* <LoginForm /> */}
         </div>
 
       </div>

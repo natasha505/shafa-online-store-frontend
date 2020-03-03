@@ -90,3 +90,55 @@
 .cart-total {
   border: 5px solid red;
 }
+
+.home-page {
+  border: 1px solid black;
+}
+
+.admin-container {
+  border: 3px solid green;
+  padding: 20px;
+  width: 80%;
+  margin: 5%;
+  -webkit-box-shadow: 10px 10px 5px rgb(197, 197, 197);
+
+}
+
+.admin-appt-card {
+  /* border: 3px solid blue; */
+  padding: 20px;
+  width: 80%;
+  margin: auto;
+  /* margin-top: 5%; */
+  /* padding: 4% 4%; */
+}
+
+.admin-pg-img {
+  border: 2px solid yellow;
+  float: left;
+}
+
+.admin-pg-info-box {
+  border: 2px solid orange;
+  float: right;
+}
+
+.item-left {
+  float: left;
+}
+
+.item-right {
+  float: right;
+}
+
+
+img {
+  image-orientation: from-image;
+}
+image {
+  image-orientation: from-image;
+}
+
+src {
+  image-orientation: from-image;
+}

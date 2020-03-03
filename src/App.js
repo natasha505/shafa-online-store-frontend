@@ -8,8 +8,9 @@ import Login from './containers/Login';
 import CartContainer from './containers/CartContainer';
 import ItemDetails from './components/ItemDetails';
 import MyAccount from './components/MyAccount';
+import AdminContainer from './containers/AdminContainer'
 
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
 
@@ -26,7 +27,9 @@ class App extends Component {
     availItems: [],
     selectedItem: false,
     cart: [],
-    user: {id: null, name: ''}
+    user: {id: null, name: ''},
+    pendingItems: []
+
   }
 
   setUserCart = (cartObj) => {
@@ -40,8 +43,6 @@ class App extends Component {
       cart: []
     })
   }
-
-
 
   setUserState = (data)  => {
     this.setState({
@@ -75,10 +76,12 @@ class App extends Component {
         name: user.name,
         email: user.email,
         img: user.img,
-        id: user.id
+        id: user.id,
+        admin: user.admin
       },() => this.fetchUserCart())
     }
     this.fetchAvailItems();
+    this.fetchPendingItems();
     // this.fetchUserCart();
   }
 
@@ -96,6 +99,14 @@ class App extends Component {
     .then(data => this.setState({ cart: data }))
     // .then(data => console.log(data))
   }
+
+  fetchPendingItems = () => {
+    fetch("http://localhost:3000/pendingitems")
+    .then(res => res.json())
+    .then(data => this.setState({ pendingItems: data }))
+  }
+
+
 
 
   showDetails = item => {
@@ -126,19 +137,22 @@ class App extends Component {
               exact 
               render={props => {
                 return (< MyAccount {...props} logOut={this.logOut} cart={this.state.cart} 
-                userName={this.state.name} email={this.state.email} userImg={this.state.img} /> )
-               } } />
-            {/* <Redirect to='/' /> */}
+                userName={this.state.name} email={this.state.email} userImg={this.state.img} admin={this.state.admin} /> )
+               } } /> 
+            <Route 
+              path='/admin-page'
+              exact
+              render={props => ( <AdminContainer {...props} userId={this.state.id} pendingItems={this.state.pendingItems}  admin={this.state.admin} /> )}
+            />
+            {/* <Redirect to='/' /> */} 
           </Router>
           ) 
       } else {
           return (
             <Router>
-             
               <NavBar loggedIn={this.state.loggedIn}/>
               <Route
-                path='/'  
-                exact
+                path='/' exact
                 render={() => ( <Home availItems={this.state.availItems}  onShowDetails={this.showDetails} /> )} />   
               <Route
                 path='/login' render={props => < Login {...props} setUserState={this.setUserState} /> } />
@@ -151,6 +165,7 @@ class App extends Component {
     }
 
   render() {
+    // console.log("pendingItems: ", this.state.pendingItems)
     // console.log("cart: ", this.state.cart)
     // console.log("loggedIn: ", this.state.loggedIn)
     // console.log("selectedItemState : ", this.state.selectedItem)

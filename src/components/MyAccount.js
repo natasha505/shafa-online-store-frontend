@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { BrowserRouter as  Link } from "react-router-dom";
+
+
 
 import { Card, Image, Button, Item } from 'semantic-ui-react';
 
@@ -21,9 +24,15 @@ class MyAccount extends Component {
     this.props.history.push('/')
   }
 
+  // handleViewAppointments = () => {
+  //   console.log("view appointments CLICKED")
+  // }
+
   render() {
     console.log("MyAccount: ", this.props.email)
     console.log("MyAccount Cart: ", this.props.cart)
+    console.log("MYACCOUNT isADMIN: ", this.props.admin)
+    
 
     return(
       <div className="my-account-container" >
@@ -52,6 +61,9 @@ class MyAccount extends Component {
             </Card.Content>
           </Card>
           <Button onClick={this.handleLogOut} style={{ backgroundColor: '#4C243B' }} inverted  floated='right'  > Log Out </Button>
+
+          { this.props.admin ? <Link to='/admin-page'> <Button style={{ backgroundColor: '#4C243B' }} inverted  floated='right'  > Admin Page </Button> </Link> : null }
+          
         </div>
         
       </div>

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 
 class LoginForm extends Component {
 
-
   constructor() {
     super()
     this.state = {
@@ -16,7 +15,6 @@ class LoginForm extends Component {
 
   handleLogin = () => {
     this.props.onLogin(this.state)
-
   }
 
   handleChange = e => {
@@ -26,7 +24,6 @@ class LoginForm extends Component {
   render() {
     return (
       <Container style={{padding: "20px"}}>
-            {/* <Image src={logo} width="250px" centered/> */}
             <Grid textAlign='center' style={{ height: '100vh' }} >
                 <Grid.Column style={{ maxWidth: 450 }}>
                 <Header as='h2' color='teal' textAlign='center' style={{padding: "20px", }}>

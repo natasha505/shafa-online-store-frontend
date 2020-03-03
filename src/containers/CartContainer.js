@@ -6,7 +6,7 @@ import { Button, Item } from 'semantic-ui-react';
 class CartContainer extends Component {
 
     renderCart = () => {
-        console.log("user id:" , this.props.userId)
+        // console.log("user id:" , this.props.userId)
         // console.log("cart user id", this.props.cart)
         if (this.props.cart) {
             return this.props.cart.map(item => {
@@ -24,7 +24,7 @@ class CartContainer extends Component {
     }
 
     priceArray = () => {
-        console.log("loggggggin", this.props.cart)
+        // console.log("loggggggin", this.props.cart)
         if (this.props.cart){
             return this.props.cart.map(cartem => {
                 return cartem.item.price
@@ -34,9 +34,9 @@ class CartContainer extends Component {
 
     mapCarts = (carts) => {
         return carts.map(kart => {
-            console.log("MAPPING KART: ", kart)
-            console.log("MAPPING KART: ", kart.item)
-            console.log("MAPPING KART: ", kart.item.status)
+            // console.log("MAPPING KART: ", kart)
+            // console.log("MAPPING KART: ", kart.item)
+            // console.log("MAPPING KART: ", kart.item.status)
             this.handleCheckout(kart.id)
             // this.patchItemStatus(kart.item_id)
         })
@@ -73,7 +73,7 @@ class CartContainer extends Component {
         //   }
   
     render() {
-        console.log("priceArry", this.priceArray())
+        // console.log("priceArry", this.priceArray())
         // console.log("CartTotal :", this.cartTotal())
         return( 
             <div className="cart-container" >
