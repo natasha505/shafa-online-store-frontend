@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import { Card } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class ItemCard extends Component {
 
@@ -16,7 +17,7 @@ class ItemCard extends Component {
   render() {
     // console.log("render", this.props.item)
     return(
-      <div  >
+      <div >
 
         <div className="card" onClick={() => this.handleItemClick()} style={{ paddingRight:"10px", paddingTop:"10px" }} >
           <Card raised 

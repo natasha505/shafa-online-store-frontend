@@ -10,7 +10,7 @@ import ItemDetails from './components/ItemDetails';
 import MyAccount from './components/MyAccount';
 import AdminContainer from './containers/AdminContainer'
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 
@@ -116,38 +116,63 @@ class App extends Component {
 
 
     routeCountroller = () => {
-      if (this.state.loggedIn){
+      if (this.state.loggedIn && this.state.admin) {
+        console.log("testing routes")
         return(
           <Router>
             <NavBar loggedIn={this.state.loggedIn}  userName={this.state.name} email={this.state.email} userImg={this.state.img}  />
-            <Route
-              path='/' 
-              exact
-              render={() => ( <Home availItems={this.state.availItems} selectedItem={this.state.selectedItem} onShowDetails={this.showDetails} />  )} />   
+              <Route
+                path='/' 
+                exact
+                render={() => ( <Home availItems={this.state.availItems} selectedItem={this.state.selectedItem} onShowDetails={this.showDetails} />  )} />   
+              <Route 
+                path='/item-details/:id'
+                render={props => ( <ItemDetails  {...props} setUserCart={this.setUserCart} cart={this.state.cart} userId={this.state.id} item={this.state.selectedItem} availItems={this.state.availItems}  onShowDetails={this.showDetails}  /> ) } />
+              <Route 
+                path="/cart"  
+                render={props => ( < CartContainer {...props} cart={this.state.cart} userId={this.state.id} setUserCart={this.setUserCart} clearUserCart={this.clearUserCart} fetchAvailItems={this.fetchAvailItems} />  )} />
+              <Route 
+                path="/my-account" 
+                exact 
+                render={props => {
+                  return (< MyAccount {...props} logOut={this.logOut} cart={this.state.cart} 
+                  userName={this.state.name} email={this.state.email} userImg={this.state.img} admin={this.state.admin} /> )
+                 } } /> 
             <Route 
-              path='/item-details/:id'
-              render={props => ( <ItemDetails  {...props} setUserCart={this.setUserCart} cart={this.state.cart} userId={this.state.id} item={this.state.selectedItem} availItems={this.state.availItems}  onShowDetails={this.showDetails}  /> ) } />
-            <Route 
-              path="/cart"  
-              render={props => ( < CartContainer {...props} cart={this.state.cart} userId={this.state.id} setUserCart={this.setUserCart} clearUserCart={this.clearUserCart} fetchAvailItems={this.fetchAvailItems} />  )} />
-            {/* <Route 
-              path="/checkout" render={props => < CartContainer {...props} /> } /> */}
-            <Route 
-              path="/my-account" 
-              exact 
-              render={props => {
-                return (< MyAccount {...props} logOut={this.logOut} cart={this.state.cart} 
-                userName={this.state.name} email={this.state.email} userImg={this.state.img} admin={this.state.admin} /> )
-               } } /> 
-            <Route 
-              path='/admin-page'
-              exact
-              render={props => ( <AdminContainer {...props} userId={this.state.id} pendingItems={this.state.pendingItems}  admin={this.state.admin} /> )}
-            />
-            {/* <Redirect to='/' /> */} 
+                  path='/admin-page'
+                  exact
+                  render={props => ( <AdminContainer {...props} userId={this.state.id} pendingItems={this.state.pendingItems}  admin={this.state.admin} /> )}
+                />
           </Router>
-          ) 
-      } else {
+        )} else if (this.state.loggedIn){
+          return(
+            <Router>
+              <NavBar loggedIn={this.state.loggedIn}  userName={this.state.name} email={this.state.email} userImg={this.state.img}  />
+              <Route
+                path='/' 
+                exact
+                render={() => ( <Home availItems={this.state.availItems} selectedItem={this.state.selectedItem} onShowDetails={this.showDetails} />  )} />   
+              <Route 
+                path='/item-details/:id'
+                render={props => ( <ItemDetails  {...props} setUserCart={this.setUserCart} cart={this.state.cart} userId={this.state.id} item={this.state.selectedItem} availItems={this.state.availItems}  onShowDetails={this.showDetails}  /> ) } />
+              <Route 
+                path="/cart"  
+                render={props => ( < CartContainer {...props} cart={this.state.cart} userId={this.state.id} setUserCart={this.setUserCart} clearUserCart={this.clearUserCart} fetchAvailItems={this.fetchAvailItems} />  )} />
+              <Route 
+                path="/my-account" 
+                exact 
+                render={props => {
+                  return (< MyAccount {...props} logOut={this.logOut} cart={this.state.cart} 
+                  userName={this.state.name} email={this.state.email} userImg={this.state.img} admin={this.state.admin} /> )
+                 } } /> 
+                 <Route 
+                  path='/admin-page'
+                  exact
+                  render={props => ( <AdminContainer {...props} userId={this.state.id} pendingItems={this.state.pendingItems}  admin={this.state.admin} /> )}
+                />
+            </Router>
+            ) 
+        } else {
           return (
             <Router>
               <NavBar loggedIn={this.state.loggedIn}/>
@@ -159,10 +184,15 @@ class App extends Component {
               <Route 
                 path='/item-details/:id'
                 render={props => ( <ItemDetails   {...props}  item={this.state.selectedItem}  availItems={this.state.availItems}  onShowDetails={this.showDetails} addToCart={this.handleAddToCart} /> ) } />
+                <Route 
+                  path='/admin-page'
+                  exact
+                  render={props => ( <AdminContainer {...props} userId={this.state.id} pendingItems={this.state.pendingItems}  admin={this.state.admin} /> )}
+                />
             </Router>
           )
         }
-    }
+      }
 
   render() {
     // console.log("pendingItems: ", this.state.pendingItems)

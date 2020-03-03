@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter as  Link } from "react-router-dom";
-
-
-
 import { Card, Image, Button, Item } from 'semantic-ui-react';
 
 class MyAccount extends Component {
@@ -61,11 +58,10 @@ class MyAccount extends Component {
             </Card.Content>
           </Card>
           <Button onClick={this.handleLogOut} style={{ backgroundColor: '#4C243B' }} inverted  floated='right'  > Log Out </Button>
-
-          { this.props.admin ? <Link to='/admin-page'> <Button style={{ backgroundColor: '#4C243B' }} inverted  floated='right'  > Admin Page </Button> </Link> : null }
-          
+          <Link to="/admin-page" > ADMIN PAGE </Link>
+          {/* { this.props.admin ? <Link to='/admin-page'>  Admin Page  </Link> : null } */}
+          {/* { this.props.admin ? <Link to='/admin-page'> <Button style={{ backgroundColor: '#4C243B' }} inverted  floated='right'  > ADMIN PAGE </Button> </Link> : null } */}
         </div>
-        
       </div>
     )
   }
