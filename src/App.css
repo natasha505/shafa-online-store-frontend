@@ -91,8 +91,18 @@
   border: 5px solid red;
 }
 
-.home-page {
-  border: 1px solid black;
+.banner-container {
+  margin: 3%;
+  border: 8px solid #EDAD19;
+  background-color: #edad19;
+  height: 170px;
+  display: block;
+  justify-content: center;
+  text-align: center;
+}
+
+.banner-header {
+  margin: 10px;
 }
 
 .admin-container {

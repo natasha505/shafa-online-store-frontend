@@ -5,6 +5,8 @@ import { Button, Item } from 'semantic-ui-react';
 
 class CartContainer extends Component {
 
+
+
     renderCart = () => {
         // console.log("user id:" , this.props.userId)
         // console.log("cart user id", this.props.cart)
@@ -60,17 +62,15 @@ class CartContainer extends Component {
             console.log(data)
             this.props.fetchAvailItems()
             this.props.clearUserCart()
-
+            this.props.fetchPendingItems()
         })
     }
 
-        // }).then(res => res.json()).then(data => {
-        //   console.log(data)
-        //   if (!data.error) {
-        //     this.props.setUserCart(data)
-        //   } else {
-        //     alert(data.error)
-        //   }
+    componentDidMount() {
+        if (!this.props.loggedIn) {
+            this.props.history.push("/login")
+        }
+    }
   
     render() {
         // console.log("priceArry", this.priceArray())

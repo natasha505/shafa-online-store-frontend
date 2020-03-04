@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Card, Image, Button, Item } from 'semantic-ui-react';
 
 class MyAccount extends Component {
@@ -14,6 +14,10 @@ class MyAccount extends Component {
         ) 
       }
     }
+  }
+
+  isAdmin() {
+    return this.props.admin
   }
 
   handleLogOut = () => {
@@ -58,7 +62,8 @@ class MyAccount extends Component {
             </Card.Content>
           </Card>
           <Button onClick={this.handleLogOut} style={{ backgroundColor: '#4C243B' }} inverted  floated='right'  > Log Out </Button>
-          <Link to="/admin-page" > ADMIN PAGE </Link>
+
+          {this.isAdmin()?<Link to="/admin-page" > ADMIN PAGE </Link>:null}
           {/* { this.props.admin ? <Link to='/admin-page'>  Admin Page  </Link> : null } */}
           {/* { this.props.admin ? <Link to='/admin-page'> <Button style={{ backgroundColor: '#4C243B' }} inverted  floated='right'  > ADMIN PAGE </Button> </Link> : null } */}
         </div>

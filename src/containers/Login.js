@@ -8,6 +8,10 @@ import GoogleLogin from 'react-google-login';
 
 class Login extends Component {
 
+  goHome() {
+    this.props.history.push("/")
+  }
+
   render() {
 
     const responseFacebook = (response) => {
@@ -27,6 +31,7 @@ class Login extends Component {
         console.log("FACEBOOK USER", data)
         localStorage.setItem("user", JSON.stringify(data))
         this.props.setUserState(data)
+        this.goHome();
       })
     }
 
@@ -47,11 +52,11 @@ class Login extends Component {
         console.log("GOOGLE USER", data)
         localStorage.setItem("user", JSON.stringify(data))
         this.props.setUserState(data)
+        this.goHome();
       })
     }
 
     return (
-
       <div className="login-container" style={{display: 'flex',  justifyContent:'center', alignItems:'center'}} >
 
         <div className="login"  >

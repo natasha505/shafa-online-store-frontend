@@ -3,7 +3,6 @@ import ItemCard from '../components/ItemCard'
 
 import { Grid } from 'semantic-ui-react'
 
-//Card, Container, Item, Segment, Column
 
 class CardContainer extends Component {
 
@@ -14,7 +13,13 @@ class CardContainer extends Component {
       // {console.log("CardContainer Item: ", item)}
       return (
           <Grid.Column>
-            <ItemCard item={item} key={id} selectedItem={this.props.selectedItem} handleAddToCart={this.handleAddToCart} onShowDetails={this.props.onShowDetails} />
+            <ItemCard 
+              handleAddToCart={this.handleAddToCart} 
+              item={item} 
+              key={id} 
+              onShowDetails={this.props.onShowDetails} 
+              selectedItem={this.props.selectedItem} 
+            />
           </Grid.Column>
       )
     })
@@ -35,12 +40,3 @@ class CardContainer extends Component {
   }
 }
  export default CardContainer;
-
-//  {console.log("cardContainer: ", item.name)}
-//           <img style={{width: "200px"}} src={item.img} />
-//           <h2>{item.name}</h2>
-//           <p>Size: {item.size}</p>
-
-//         <div className="item-container-div" style={{ paddingRight:"10px", paddingTop:"10px" }}> 
-//        <ItemCard item={item} />
-//        </div> 

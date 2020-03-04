@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 import { Card } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 
 class ItemCard extends Component {
 

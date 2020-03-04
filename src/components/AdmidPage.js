@@ -24,12 +24,15 @@ class AdminPage extends Component {
       })
     }).then(res => res.json()).then(data => {
       console.log(data)
-      // this.props.clearUserCart()
+      this.props.fetchPendingItems()
     })
   }
 
   handleReject = item => {
-    console.log("click ReJECT", item.item.id)
+    console.log("click ReJECT", item)
+    console.log("clicked REJECT: ", item.item.status)
+    // this.deleteCart(item.cart_id)
+
     fetch(`http://localhost:3000/items/${item.item.id}`, {
       method: "PATCH",
       headers: {
@@ -42,10 +45,18 @@ class AdminPage extends Component {
       })
     }).then(res => res.json()).then( data => {
       console.log(data)
+      this.deleteCart(data.carts[0].id)
+      this.props.fetchPendingItems()
+      this.props.fetchAvailItems()
     })
-    
   }
 
+  deleteCart = (cartId) => {
+    console.log("delete cart", cartId)
+    fetch(`http://localhost:3000/carts/${cartId}`, {
+      method: "DELETE"
+    }).then(res => res.json())
+  }
 
   render() {
     // console.log("::::AdminPAGE::::", this.props.item.item)
@@ -57,7 +68,7 @@ class AdminPage extends Component {
           </div>
           <div className="item-right">
             <Item.Content verticalAlign='middle' floated='right'>
-              <Item.Header>{this.props.item.user_email}</Item.Header>
+              <Item.Header>{this.props.item.user.email}</Item.Header>
               <Item.Description>{this.props.item.item.name}</Item.Description>
               <Item.Extra>
                 <Button positive onClick={() => this.handleAccept(this.props.item)}>Accept</Button>
