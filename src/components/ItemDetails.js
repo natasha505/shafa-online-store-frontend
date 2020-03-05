@@ -40,7 +40,7 @@ class ItemDetails extends Component {
       if (thisItem.id === parseInt(this.props.match.params.id)) {
         this.setState({ item: thisItem });
       }
-    });
+    })
   }
 
   render() {
@@ -52,7 +52,7 @@ class ItemDetails extends Component {
       <>
         {item !== null ? (
           <div className="details-container">
-            <h1>ITEM DETAILS</h1>
+            <h1></h1>
             <div className="item-details">
               <Item.Group>
                 <Item>

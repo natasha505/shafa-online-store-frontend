@@ -8,7 +8,7 @@ class CardContainer extends Component {
 
   componentWillUnmount(){
     // console.log("CLEARED")
-    this.props.clearSearch()
+    this.props.clearSearch();
   }
 
 //map over cards & display them
@@ -19,6 +19,7 @@ class CardContainer extends Component {
       return (
           <Grid.Column key={id}>
             <ItemCard 
+              clearCategorySelect={this.props.clearCategorySelect}
               handleAddToCart={this.handleAddToCart} 
               item={item} 
               key={id} 

@@ -14,6 +14,7 @@ class Cart extends Component{
       <div className="cart-container">
         <h1>this is a CART</h1>
         {this.showCart()}
+        
       </div>
     )
   }

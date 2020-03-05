@@ -28,9 +28,7 @@ class NavBar extends Component{
   handleSearch = e => {
     // console.log("handleSearchChange ::: ", e)
     this.props.onSearch(e);
-
   }
-
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -38,21 +36,21 @@ class NavBar extends Component{
   }
 
 
-  handleSelect = (category) => {
-    // console.log("change____", category.items)
-    this.props.categorySelect(category.items)
-    
-  }
-
   categoryOptions = () => {
+    // console.log("categories: ", this.props.categories)
     return this.props.categories.map((c, id)=> {
+      // console.log("__________________",c)
       return <Dropdown.Item text={c.category_name} key={id} onClick={() => this.handleSelect(c)} />
-      // console.log("__________________",c.category_name)
     })
   }
 
+  handleSelect = (category) => {
+    console.log("change____", category.items)
+    this.props.categorySelect(category.items)
+  }
+
   render(){
-    // console.log("NAV_BAR:", this.props.availItems)
+    // console.log("NAV_BAR availItems:", this.props.availItems)
     // console.log("NavBar: ", this.props )
     // console.log("userName :", this.props.userName)
     return(
@@ -66,13 +64,18 @@ class NavBar extends Component{
             </Link>
           </Menu.Item>
 
-          <Menu.Item>
+
+
+          {/* <Menu.Item>
             <Dropdown text='Categories' simple item  >
               <Dropdown.Menu  >
                 {this.categoryOptions()}
               </Dropdown.Menu>
             </Dropdown>
-          </Menu.Item>
+          </Menu.Item> */}
+
+
+
 
           <Menu.Menu position='right'>
             <Menu.Item>

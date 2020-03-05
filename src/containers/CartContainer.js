@@ -6,7 +6,6 @@ import { Button, Item } from 'semantic-ui-react';
 class CartContainer extends Component {
 
 
-
     renderCart = () => {
         // console.log("user id:" , this.props.userId)
         // console.log("cart user id", this.props.cart)
@@ -77,7 +76,7 @@ class CartContainer extends Component {
         // console.log("CartTotal :", this.cartTotal())
         return( 
             <div className="cart-container" >
-                <h2>this is a cart container</h2>
+                <h1>Your Cart:</h1>
                 <Item.Group>
                    {this.renderCart()}
                 </Item.Group>

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { Card, Image, Button, Item } from 'semantic-ui-react';
+import { Card, Image, Button, Item, Segment, Container, Header} from 'semantic-ui-react';
 
 class MyAccount extends Component {
 
   miniCartCard = () => {
+    
     if(this.props.email === this.props.carts.user.email) {
       if(this.props.carts.complete === true){
         return(
@@ -36,38 +37,35 @@ class MyAccount extends Component {
     
 
     return(
-      <div className="my-account-container" >
-        <div className="title">
-          <h1>My Account</h1>
-        </div>
+      <Container>
+        <Segment>
+          <Header>My Account</Header>
+          <Segment.Group horizontal>
+            <Segment className='account-side1-segment'>
+            {/* cart history goes here */}
+            </Segment>
+            <Segment>
+              <Card>
+               <Image src={this.props.userImg} wrapped ui={false} size='tiny' />
+               <Card.Content>
+                 <Card.Header>Name: {this.props.userName}</Card.Header>
+                 <Card.Meta>
+                   <span className='email'>Email: {this.props.email}</span>
+                 </Card.Meta>
+               </Card.Content>
+             </Card>
+             <Button onClick={this.handleLogOut} style={{ backgroundColor: '#4C243B' }} inverted  floated='right'  > Log Out </Button>
+            {this.isAdmin()?<Link to="/admin-page" > ADMIN PAGE </Link>:null}
+            </Segment>
+          </Segment.Group>
+        </Segment>
+      </Container>
 
-        <div className="my-account-container-left">
-          <h2>Purchase History</h2>
-          <h2>{this.props.email}</h2>
-          <Item.Group>
-              {this.miniCartCard}
-          </Item.Group>
-          
-        </div>
 
-        <div className="my-account-container-right">
-          <h4> RIGHT CONTAINER</h4>
-          <Card>
-            <Image src={this.props.userImg} wrapped ui={false} size='tiny' />
-            <Card.Content>
-              <Card.Header>Name: {this.props.userName}</Card.Header>
-              <Card.Meta>
-                <span className='email'>Email: {this.props.email}</span>
-              </Card.Meta>
-            </Card.Content>
-          </Card>
-          <Button onClick={this.handleLogOut} style={{ backgroundColor: '#4C243B' }} inverted  floated='right'  > Log Out </Button>
 
-          {this.isAdmin()?<Link to="/admin-page" > ADMIN PAGE </Link>:null}
-          {/* { this.props.admin ? <Link to='/admin-page'>  Admin Page  </Link> : null } */}
-          {/* { this.props.admin ? <Link to='/admin-page'> <Button style={{ backgroundColor: '#4C243B' }} inverted  floated='right'  > ADMIN PAGE </Button> </Link> : null } */}
-        </div>
-      </div>
+
+
+    
     )
   }
 

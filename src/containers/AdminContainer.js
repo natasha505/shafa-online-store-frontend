@@ -43,7 +43,7 @@ class AdminContainer extends Component {
       <>
         {this.isReady() ? (
           <div className="admin-container">
-            <h1> Admin view Page </h1>
+            <h1> Items to Be Processed: </h1>
             <div className="admin-appt-card">
               <Item.Group>{this.displayPendingItem()}</Item.Group>
             </div>

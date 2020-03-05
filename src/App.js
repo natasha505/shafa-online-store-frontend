@@ -23,6 +23,7 @@ class App extends Component {
     availItems: [],
     selectedItem: false,
     cart: [],
+    trueCart: [],
     user: { id: null, name: "" },
     pendingItems: [],
     search: "",
@@ -43,6 +44,12 @@ class App extends Component {
   }
 
   clearItemSelect = () => {
+    this.setState({
+      availItems: []
+    })
+  }
+
+  clearCategorySelect = () => {
     this.setState({
       availItems: []
     })
@@ -102,6 +109,7 @@ class App extends Component {
           id: user.id,
           admin: user.admin
         },
+        () => this.fetchTrueCart(),
         () => this.fetchUserCart()
       );
     }
@@ -131,6 +139,13 @@ class App extends Component {
     // .then(data => console.log(data))
   };
 
+  fetchTrueCart = () => {
+    fetch(`http://localhost:3000/usercarts/${this.state.id}`)
+      .then(res => res.json())
+      .then(data => this.setState({ trueCart: data }));
+    // .then(data => console.log(data))
+  }
+
   fetchCategories = () => {
     fetch("http://localhost:3000/categories")
       .then(res => res.json())
@@ -144,15 +159,16 @@ class App extends Component {
 
 
   categorySelect = (selection) => {
-    this.setState({
-      availItems: selection
+    let targetItems = []
+    let categoryIds = selection.map(category => category.id)
+    categoryIds.forEach(id => {
+      targetItems.push(this.state.availItems.find(item => item.id === id))
     })
+    this.setState({ availItems: targetItems})
   }
 
-
   routeCountroller = () => {
-
-    const   availItems = this.state.availItems.filter(i => {
+    const availItems = this.state.availItems.filter(i => {
       // console.log("avail iiiiii", i.name.includes(this.state.search))
       return (i.name.includes(this.state.search) || i.brand.includes(this.state.search) || i.color.includes(this.state.search) || i.category.category_name.includes(this.state.search))
     })
@@ -163,6 +179,9 @@ class App extends Component {
       <Router>
         <NavBar
           availItems={this.state.availItems}
+
+          // availItems={availItems}
+
           categories={this.state.categories}
           categorySelect={this.categorySelect}
           clearSearch={this.clearSearch}
@@ -182,6 +201,7 @@ class App extends Component {
               availItems={availItems}
               // availItems={this.state.availItems}
               clearSearch={this.clearSearch}
+              clearCategorySelect={this.clearCategorySelect}
               onShowDetails={this.showDetails}
               selectedItem={this.state.selectedItem}
               userId={this.state.id}
@@ -263,10 +283,12 @@ class App extends Component {
 
 
   render() {
+    console.log("APP TRUEcart: ___", this.state.trueCart)
     // console.log("app SEARCH:", this.state.search)
-    // console.log("app availItems:", this.state.availItems)
+    // console.log("APP availItems state:", this.state.availItems)
+    // console.log("app availItems: ", this.availItems)
     // console.log("pendingItems: ", this.state.pendingItems)
-    // console.log("cart: ", this.state.cart)
+    console.log("cart: ", this.state.cart)
     // console.log("loggedIn: ", this.state.loggedIn)
     // console.log("selectedItemState : ", this.state.selectedItem)
 
