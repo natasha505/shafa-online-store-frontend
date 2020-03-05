@@ -32,6 +32,7 @@ class ItemDetails extends Component {
     item: null
   };
 
+  
   componentDidMount() {
     // console.log("ITEM ID compDidMount", thisItem.id);
     // console.log("PARAMS ID", this.props.match.params.id);
