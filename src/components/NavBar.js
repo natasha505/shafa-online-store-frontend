@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 
 import logo from '../images/logo.png';
 
-import { Image, Icon, Input, Menu, Sticky } from 'semantic-ui-react';
+import { Dropdown, Icon, Image, Input, Menu, Sticky } from 'semantic-ui-react';
 import { Link } from  'react-router-dom';
 
 // yellow: eca400   dark:  4c243b     darker:  230c0f
 class NavBar extends Component{
+
 
   userIcon = () => {
     if (this.props.loggedIn){
@@ -24,7 +25,34 @@ class NavBar extends Component{
     }
   }
 
+  handleSearch = e => {
+    // console.log("handleSearchChange ::: ", e)
+    this.props.onSearch(e);
+
+  }
+
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("SUBMIT")
+  }
+
+
+  handleSelect = (category) => {
+    // console.log("change____", category.items)
+    this.props.categorySelect(category.items)
+    
+  }
+
+  categoryOptions = () => {
+    return this.props.categories.map((c, id)=> {
+      return <Dropdown.Item text={c.category_name} key={id} onClick={() => this.handleSelect(c)} />
+      // console.log("__________________",c.category_name)
+    })
+  }
+
   render(){
+    // console.log("NAV_BAR:", this.props.availItems)
     // console.log("NavBar: ", this.props )
     // console.log("userName :", this.props.userName)
     return(
@@ -38,9 +66,19 @@ class NavBar extends Component{
             </Link>
           </Menu.Item>
 
+          <Menu.Item>
+            <Dropdown text='Categories' simple item  >
+              <Dropdown.Menu  >
+                {this.categoryOptions()}
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu.Item>
+
           <Menu.Menu position='right'>
             <Menu.Item>
-              <Input icon='search' placeholder='Search...' />
+              <form onSubmit={this.handleSubmit}>
+                <Input icon='search' placeholder='Search...' onChange={this.handleSearch} value={this.props.search} />
+              </form>
             </Menu.Item>
           </Menu.Menu>
 

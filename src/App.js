@@ -10,7 +10,7 @@ import ItemDetails from "./components/ItemDetails";
 import MyAccount from "./components/MyAccount";
 import AdminContainer from "./containers/AdminContainer";
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 class App extends Component {
   state = {
@@ -24,7 +24,10 @@ class App extends Component {
     selectedItem: false,
     cart: [],
     user: { id: null, name: "" },
-    pendingItems: []
+    pendingItems: [],
+    search: "",
+    categories: [],
+    option: null
   };
 
   clearUserCart = () => {
@@ -32,6 +35,18 @@ class App extends Component {
       cart: []
     });
   };
+
+  clearSearch = () => {
+    this.setState({
+      search: ""
+    })
+  }
+
+  clearItemSelect = () => {
+    this.setState({
+      availItems: []
+    })
+  }
 
   logOut = () => {
     this.setState({
@@ -65,6 +80,15 @@ class App extends Component {
     );
   };
 
+  updateSearch = e => {
+    const input = e.target.value;
+    const upFirstLetter = input.charAt(0).toUpperCase() + input.slice(1);
+    // console.log("__CAPITALIZE__", upFirstLetter)
+    this.setState({
+      search: upFirstLetter
+    })
+  };
+
   componentDidMount() {
     // console.log(localStorage.getItem("user"))
     if (localStorage.getItem("user")) {
@@ -83,6 +107,8 @@ class App extends Component {
     }
     this.fetchAvailItems();
     this.fetchPendingItems();
+    this.fetchCategories();
+
     // this.fetchUserCart();
   }
 
@@ -105,17 +131,46 @@ class App extends Component {
     // .then(data => console.log(data))
   };
 
+  fetchCategories = () => {
+    fetch("http://localhost:3000/categories")
+      .then(res => res.json())
+      .then(data => this.setState({ categories: data }));
+  };
+
   showDetails = item => {
     // console.log("showDetails: ", item)
     this.setState({ selectedItem: item });
   };
 
+
+  categorySelect = (selection) => {
+    this.setState({
+      availItems: selection
+    })
+  }
+
+
   routeCountroller = () => {
+
+    const   availItems = this.state.availItems.filter(i => {
+      // console.log("avail iiiiii", i.name.includes(this.state.search))
+      return (i.name.includes(this.state.search) || i.brand.includes(this.state.search) || i.color.includes(this.state.search) || i.category.category_name.includes(this.state.search))
+    })
+    // console.log("SEARCHED ITEMS: ", searchedItem)
+
+
     return (
       <Router>
         <NavBar
+          availItems={this.state.availItems}
+          categories={this.state.categories}
+          categorySelect={this.categorySelect}
+          clearSearch={this.clearSearch}
           email={this.state.email}
+          handleCategorySelect={this.handleCategorySelect}
           loggedIn={this.state.loggedIn}
+          onSearch={this.updateSearch}
+          search={this.state.search}
           userImg={this.state.img}
           userName={this.state.name}
         />
@@ -124,7 +179,9 @@ class App extends Component {
           exact
           render={() => (
             <Home
-              availItems={this.state.availItems}
+              availItems={availItems}
+              // availItems={this.state.availItems}
+              clearSearch={this.clearSearch}
               onShowDetails={this.showDetails}
               selectedItem={this.state.selectedItem}
               userId={this.state.id}
@@ -138,6 +195,7 @@ class App extends Component {
             <AdminContainer
               {...props}
               admin={this.state.admin}
+              clearSearch={this.clearSearch}
               fetchAvailItems={this.fetchAvailItems}
               fetchPendingItems={this.fetchPendingItems}
               pendingItems={this.state.pendingItems}
@@ -203,11 +261,18 @@ class App extends Component {
     );
   };
 
+
   render() {
+    // console.log("app SEARCH:", this.state.search)
+    // console.log("app availItems:", this.state.availItems)
     // console.log("pendingItems: ", this.state.pendingItems)
     // console.log("cart: ", this.state.cart)
     // console.log("loggedIn: ", this.state.loggedIn)
     // console.log("selectedItemState : ", this.state.selectedItem)
+
+
+  
+
     return <div>{this.routeCountroller()}</div>;
   }
 }

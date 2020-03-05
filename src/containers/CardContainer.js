@@ -6,13 +6,18 @@ import { Grid } from 'semantic-ui-react'
 
 class CardContainer extends Component {
 
+  componentWillUnmount(){
+    // console.log("CLEARED")
+    this.props.clearSearch()
+  }
+
 //map over cards & display them
   renderCards = () => {
     // console.log("CardContainer: ", this.props.allItems)
     return this.props.availItems.map((item, id) => {
       // {console.log("CardContainer Item: ", item)}
       return (
-          <Grid.Column>
+          <Grid.Column key={id}>
             <ItemCard 
               handleAddToCart={this.handleAddToCart} 
               item={item} 

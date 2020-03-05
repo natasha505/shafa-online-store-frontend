@@ -4,26 +4,7 @@ import { Button, Icon, Item, Label } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 
 class ItemDetails extends Component {
-  //     // console.log("handleAddToCart ", this.props.userId)
-  //     // console.log("show me item ", item)
-  //     // console.log("show me cart: ", this.props.cart)
 
-  //     // console.log(this.props.cart.includes(item))
-
-  //     // if (this.props.cart.includes(item))
-  //     let uniqueItem = true;
-  // this.props.cart.forEach(cartItem => {
-  //   if (cartItem.item_id === item.id) {
-  //     uniqueItem = false;
-  //   }
-  // })
-
-  // // const cartItems = this.props.cart.map(record => record.item)
-
-  // // console.log("CART: ", cartItems)
-  // // console.log("NEW ITEM FOR CART: ", item)
-
-  // if (uniqueItem) {
   handleAddToCart = item => {
     console.log("handleAddITEM", item)
     console.log("handleAdd USER ID", this.props.userId)
@@ -52,9 +33,9 @@ class ItemDetails extends Component {
   };
 
   componentDidMount() {
+    // console.log("ITEM ID compDidMount", thisItem.id);
+    // console.log("PARAMS ID", this.props.match.params.id);
     this.props.availItems.forEach(thisItem => {
-      // console.log("ITEM ID compDidMount", thisItem.id);
-      // console.log("PARAMS ID", this.props.match.params.id);
       if (thisItem.id === parseInt(this.props.match.params.id)) {
         this.setState({ item: thisItem });
       }
@@ -62,9 +43,10 @@ class ItemDetails extends Component {
   }
 
   render() {
-    const { item } = this.state;
+    // console.log("IDEM DETAILS___", this.props.availItems)
     // console.log("ItemDetails", this.item)
-    console.log("ItemDetails userId: ", this.props.userId)
+    // console.log("ItemDetails userId: ", this.props.userId)
+    const { item } = this.state;
     return (
       <>
         {item !== null ? (

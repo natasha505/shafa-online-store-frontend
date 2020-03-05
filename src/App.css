@@ -39,7 +39,7 @@
 
 .card-container {
   border: 1px solid white;
-  width: 80%;
+  width: 60%;
   margin: auto;
   padding: 10px;
 }
@@ -139,16 +139,4 @@
 
 .item-right {
   float: right;
-}
-
-
-img {
-  image-orientation: from-image;
-}
-image {
-  image-orientation: from-image;
-}
-
-src {
-  image-orientation: from-image;
 }

@@ -13,7 +13,7 @@ class AdminContainer extends Component {
       .then(res => res.json())
       .then(json => {
         console.log(json);
-        if (!json.admin || this.props.userId == "") {
+        if (!json.admin || this.props.userId === "") {
           this.props.history.push("/");
         } else {
           this.setState({ready: true})

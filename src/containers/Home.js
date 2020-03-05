@@ -19,6 +19,7 @@ class Home extends Component {
         <div style={{ textAlign: "center" }}>
           <CardContainer
             availItems={this.props.availItems}
+            clearSearch={this.props.clearSearch}
             onShowDetails={this.props.onShowDetails}
             selectedItem={this.props.selectedItem}
           />
